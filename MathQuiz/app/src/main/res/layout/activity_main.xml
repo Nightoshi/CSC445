@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="horizontal" >
+    android:baselineAligned="false"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/question_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:text="@string/message"/>
+        android:padding="24dp"/>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -29,5 +31,11 @@
             android:text="@string/false_button"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next_button"/>
 
 </LinearLayout>
