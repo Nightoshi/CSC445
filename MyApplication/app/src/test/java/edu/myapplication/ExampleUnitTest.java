@@ -1,4 +1,4 @@
-package csc445.loggingcycle;
+package edu.myapplication;
 
 import org.junit.Test;
 

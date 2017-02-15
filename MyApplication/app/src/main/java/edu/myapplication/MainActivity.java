@@ -1,4 +1,4 @@
-package csc445.loggingcycle;
+package edu.myapplication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

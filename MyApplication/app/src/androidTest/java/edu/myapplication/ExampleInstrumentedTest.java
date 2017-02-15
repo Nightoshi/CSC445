@@ -1,4 +1,4 @@
-package csc445.loggingcycle;
+package edu.myapplication;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("csc445.loggingcycle", appContext.getPackageName());
+        assertEquals("edu.myapplication", appContext.getPackageName());
     }
 }
