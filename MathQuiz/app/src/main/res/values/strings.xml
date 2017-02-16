@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">MathQuiz</string>
-    <string name="question_text">Constaninople is the largest cty in Turkey.</string>
-    <string name="true_button">True</string>
-    <string name="false_button">False</string>
+    <string name="true_button">7</string>
+    <string name="false_button">8</string>
+    <string name="next_button">Next</string>
     <string name="action_settings">Settings</string>
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
+    <string name="question_add">4 + 3 = ?</string>
+    <string name="question_sub">5 - 2 = ?</string>
+    <string name="question_mult">4 x 2 = ?</string>
+    <string name="question_div">16 / 2 = ?</string>
 </resources>
