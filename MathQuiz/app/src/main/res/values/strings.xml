@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MathQuiz</string>
-    <string name="seven_button">7</string>
-    <string name="eight_button">8</string>
+    <string name="true_button">7</string>
+    <string name="false_button">8</string>
     <string name="next_button">Next</string>
     <string name="action_settings">Settings</string>
     <string name="correct_toast">Correct!</string>
