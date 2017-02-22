@@ -75,5 +75,7 @@ public class QuizActivity extends AppCompatActivity {
         });
         updateQuestion();
 
+        //Placeholder for update...
+
     }
 }
