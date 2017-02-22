@@ -1,8 +1,5 @@
 package csc445.lye.edu.missouriwestern.mathquiz;
 
-/**
- * Created by Lisa on 2/15/2017.
- */
 
 public class Question {
     private int mTextResId;
@@ -21,7 +18,7 @@ public class Question {
         mTextResId = textResId;
     }
 
-    public int getAnswerTrue() {
+    public int isAnswerTrue() {
         return mAnswerTrue;
     }
 
