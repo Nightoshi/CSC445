@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,7 +14,9 @@ public class CheatActivity extends AppCompatActivity {
 
     private static final String EXTRA_ANSWER_IS_TRUE =
             "csc445.lye.edu.missouriwestern.mathquiz.answer.is.true";
-    private TextView mAnswerIsTrue;
+    private static final String EXTRA_ANSWER_SHOWN =
+            "csc445.lye.edu.missouriwestern.mathquiz.answer_shown";
+    private boolean mAnswerIsTrue;
     private TextView mAnswerTextView;
     private Button mShowAnswer;
 
@@ -23,14 +26,37 @@ public class CheatActivity extends AppCompatActivity {
         return i;
     }
 
+    public static boolean wasAnswerShown(Intent result) {
+        return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, false);
+    }
+
+    private void setAnswerShownResult(boolean isAnswerShown) {
+        Intent data = new Intent();
+        data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
+        setResult(RESULT_OK, data);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
 
-        //mAnswerIsTrue = getIntent().getIntExtra(EXTRA_ANSWER_IS_TRUE, 7);
-        mAnswerIsTrue = (TextView) findViewById(R.id.answer_text_view);
-        mShowAnswer = (Button) findViewById(R.id.show_answer_button);
+        mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
+
+        mAnswerTextView = (TextView)findViewById(R.id.answer_text_view);
+        mShowAnswer = (Button)findViewById(R.id.show_answer_button);
+        mShowAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAnswerIsTrue) {
+                    mAnswerTextView.setText(R.string.true_button);
+                } else {
+                    mAnswerTextView.setText(R.string.false_button);
+                }
+                setAnswerShownResult(true);
+            }
+        });
+
     }
 }
