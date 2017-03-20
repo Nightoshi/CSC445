@@ -1,0 +1,3 @@
+public class CrimeListFragment extends Fragment {
+	//nothing yet...
+}
