@@ -73,7 +73,7 @@ public class CrimeListFragment extends Fragment {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.list_item_crime, parent, false);
             return new CrimeHolder(view);
-        }
+        }		
 
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {

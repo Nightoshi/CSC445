@@ -13,7 +13,11 @@ import java.util.UUID;
 public class CrimeActivity extends SingleFragmentActivity {
 
     private static final String EXTRA_CRIME_ID =
-            "com.bignerdranch.android.criminalintent.crime_id";
+            "csc445.lye.edu.missouriwestern.criminalIntent";
+            
+	public static String getExtraCrimeId(){
+		return EXTRA_CRIME_ID;
+	}
 
     public static Intent newIntent(Context packageContext, UUID crimeId) {
         Intent intent = new Intent(packageContext, CrimeActivity.class);
