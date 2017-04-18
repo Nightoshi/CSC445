@@ -1,0 +1,13 @@
+package csc445.lye.edu.missouriwestern.ly_softball;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class SoftballActivity extends FragmentActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_softball);
+    }
+}
