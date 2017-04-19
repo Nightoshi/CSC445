@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.Menu;
 
 import java.util.List;
 
@@ -18,6 +19,11 @@ import java.util.List;
 public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
+    
+    @Override
+    public void onCreateOptionsMenu(Menu m, MenuInflater mInflater){
+		inflater.inflate(R.menu.fragment_crime_list, menu);
+	}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -27,6 +33,7 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
+        setHasOptionsMenu(true);
         return view;
     }
 

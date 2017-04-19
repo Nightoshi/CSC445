@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import java.util.List;
+import android.support.v7.app.AppCompatActivity
 
-public class CrimePagerActivity extends FragmentActivity{
+public class CrimePagerActivity extends AppCompatActivity{
 	private ViewPager;
 	private List<Crime> mCrimes;
 	private static final String EXTRA_CRIME_ID = "csc445.lye.edu.missouriwestern.criminalIntent.crime_id";
