@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -21,7 +21,8 @@ public class SoftballListFragment extends Fragment {
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_softball_list, container, false);
 
-        mSoftballRecyclerView = (RecyclerView) view .findViewById(R.id.softball_recycler_view);
+        mSoftballRecyclerView = (RecyclerView) view
+                .findViewById(R.id.softball_recycler_view);
         mSoftballRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
@@ -30,26 +31,25 @@ public class SoftballListFragment extends Fragment {
     }
 
     private class SoftballHolder extends RecyclerView.ViewHolder{
-        public EditText mLastNameEdit;
+        public TextView mTitleTextView;
 
         public SoftballHolder(View itemView){
             super(itemView);
 
-            mLastNameEdit = (EditText) itemView;
+            mTitleTextView = (TextView) itemView;
         }
-
     }
 
     private class SoftballAdapter extends RecyclerView.Adapter<SoftballHolder>{
-        private List<Players> mPlayers;
+        private List<Softball> mSoftballs;
 
-        public SoftballAdapter(List<Players> players){
-            mPlayers = players;
+        public SoftballAdapter(List <Softball> softballs){
+            mSoftballs = softballs;
         }
 
         @Override
         public SoftballHolder onCreateViewHolder(ViewGroup parent, int viewType){
-            LayoutInflater layoutInflater= LayoutInflater.from(getActivity());
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater
                     .inflate(android.R.layout.simple_list_item_1, parent, false);
             return new SoftballHolder(view);
@@ -57,21 +57,21 @@ public class SoftballListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(SoftballHolder holder, int position){
-            Players players = mPlayers.get(position);
-            holder.mLastNameEdit.setText(players.getLastName());
+            Softball softball = mSoftballs.get(position);
+            holder.mTitleTextView.setText(softball.getTitle());
         }
 
         @Override
         public int getItemCount(){
-            return mPlayers.size();
+            return mSoftballs.size();
         }
     }
 
     private void updateUI(){
         SoftballLab softballLab = SoftballLab.get(getActivity());
-        List<Players> players = softballLab.getPlayers();
+        List<Softball> softBall = softballLab.getSoftBall();
 
-        mSoftballAdapter = new SoftballAdapter(players);
+        mSoftballAdapter = new SoftballAdapter(softBall);
         mSoftballRecyclerView.setAdapter(mSoftballAdapter);
     }
 

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class SoftballLab {
     private static SoftballLab sSoftballLab;
-    private List<Players> mPlayers;
+    private List<Softball> mSoftballs;
 
     public static SoftballLab get(Context context){
         if (sSoftballLab == null) {
@@ -18,21 +18,22 @@ public class SoftballLab {
     }
 
     private SoftballLab(Context context){
-        mPlayers = new ArrayList();
+        mSoftballs = new ArrayList();
         for (int i=0; i<100; i++){
-            Players players = new Players();
-            mPlayers.add(players);
+            Softball softball = new Softball();
+            softball.setTitle("Player #" + i);
+            mSoftballs.add(softball);
         }
     }
 
-    public List<Players> getPlayers(){
-        return mPlayers;
+    public List<Softball> getSoftBall(){
+        return mSoftballs;
     }
 
-    public Players getPlayers(UUID id) {
-        for (Players players : mPlayers){
-            if(players.getId().equals(id)){
-                return players;
+    public Softball getSoftball(UUID id) {
+        for (Softball softball : mSoftballs){
+            if(softball.getId().equals(id)){
+                return softball;
             }
         }
         return null;

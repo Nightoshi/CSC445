@@ -3,7 +3,7 @@ package csc445.lye.edu.missouriwestern.ly_softball;
 import java.util.Date;
 import java.util.UUID;
 
-public class Players {
+public class Softball {
     private UUID id;
     private String lastName;
     private String firstName;
@@ -14,8 +14,10 @@ public class Players {
     private boolean isInfield;
     private boolean isOutfield;
     private String positions;
+    private String Title;
 
-    public Players(){
+
+    public Softball(){
         setId();
         setLastUpdate();
         setLastName("");
@@ -133,5 +135,13 @@ public class Players {
                 ", number='" + number + '\'' +
                 ", lastUpdate='" + positions + '\'' +
                 '}';
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
     }
 }

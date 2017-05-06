@@ -14,7 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 public class SoftballFragment extends Fragment{
-    private Players mPlayers;
+    private Softball mSoftball;
     private Button mDateButton;
     private CheckBox mPitcherCheckBox;
     private CheckBox mCatcherCheckBox;
@@ -27,7 +27,7 @@ public class SoftballFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mPlayers = new Players();
+        mSoftball = new Softball();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class SoftballFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_softball, container, false);
 
         mDateButton = (Button)v.findViewById(R.id.date_button);
-        mDateButton.setText(mPlayers.getLastUpdate().toString());
+        mDateButton.setText(mSoftball.getLastUpdate().toString());
         mDateButton.setEnabled(false);
 
         mLastNameField = (EditText)v.findViewById(R.id.softball_last_name);
@@ -48,7 +48,7 @@ public class SoftballFragment extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                mPlayers.setLastName(s.toString());
+                mSoftball.setLastName(s.toString());
 
             }
 
@@ -67,7 +67,7 @@ public class SoftballFragment extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                mPlayers.setLastName(s.toString());
+                mSoftball.setLastName(s.toString());
 
             }
 
@@ -86,7 +86,7 @@ public class SoftballFragment extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
-                mPlayers.setLastName(s.toString());
+                mSoftball.setLastName(s.toString());
 
             }
 
@@ -100,7 +100,7 @@ public class SoftballFragment extends Fragment{
         mPitcherCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPlayers.setPitcher(isChecked);
+                mSoftball.setPitcher(isChecked);
             }
         });
 
@@ -108,7 +108,7 @@ public class SoftballFragment extends Fragment{
         mCatcherCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPlayers.setCatcher(isChecked);
+                mSoftball.setCatcher(isChecked);
             }
         });
 
@@ -116,7 +116,7 @@ public class SoftballFragment extends Fragment{
         mInfieldCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPlayers.setInfield(isChecked);
+                mSoftball.setInfield(isChecked);
             }
         });
 
@@ -124,7 +124,7 @@ public class SoftballFragment extends Fragment{
         mOutfieldCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPlayers.setOutfield(isChecked);
+                mSoftball.setOutfield(isChecked);
             }
         });
         return v;

@@ -7,23 +7,31 @@
 	android:baselineAligned="false"
 	android:orientation="vertical">
 
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/softball_title"
+		android:text="@string/softball_title_label"
+		style="?android:listSeparatorTextViewStyle"/>
+
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal">
 
-		<EditText
-			android:id="@+id/softball_last_name"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:hint="@string/softball_last_name_hint"/>
+			<EditText
+				android:id="@+id/softball_last_name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:hint="@string/softball_last_name_hint"/>
 
-		<EditText
-			android:id="@+id/softball_first_name"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:hint="@string/softball_first_name_hint"
-			android:layout_marginLeft="16dp"/>
+			<EditText
+				android:id="@+id/softball_first_name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:hint="@string/softball_first_name_hint"
+				android:layout_marginLeft="16dp"/>
+
 	</LinearLayout>
 
 
@@ -44,8 +52,7 @@
 				android:id="@+id/softball_jersey"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:hint="@string/softball_jersey_hint"
-				android:layout_marginTop="16dp"/>
+				android:hint="@string/softball_jersey_hint"/>
 			
 			<Button
 				android:layout_width="wrap_content"
