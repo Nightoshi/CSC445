@@ -1,5 +1,6 @@
 package csc445.lye.edu.missouriwestern.ly_softball;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -30,13 +33,35 @@ public class SoftballListFragment extends Fragment {
         return view;
     }
 
-    private class SoftballHolder extends RecyclerView.ViewHolder{
-        public TextView mTitleTextView;
+    private class SoftballHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        private TextView mTitleTextView;
+        private CheckBox mCheckBox;
+        private Softball mSoftball;
+
 
         public SoftballHolder(View itemView){
             super(itemView);
+            itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView) itemView;
+            mTitleTextView = (TextView)
+                    itemView.findViewById(R.id.list_item_softball_title_text_view);
+            mCheckBox = (CheckBox)
+                    itemView.findViewById(R.id.list_item_softball_check_box);
+        }
+
+        @Override
+        public void onClick(View v) {
+//            Toast.makeText(getActivity(),
+//                    mSoftball.getTitle()+ " clicked!", Toast.LENGTH_SHORT)
+//                    .show();
+            Intent intent = SoftballActivity.newIntent(getActivity(),mSoftball.getId());
+            startActivity(intent);
+
+    }
+
+        public void bindSoftball(Softball softball){
+            mSoftball = softball;
+            mTitleTextView.setText(mSoftball.getTitle());
         }
     }
 
@@ -51,14 +76,14 @@ public class SoftballListFragment extends Fragment {
         public SoftballHolder onCreateViewHolder(ViewGroup parent, int viewType){
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater
-                    .inflate(android.R.layout.simple_list_item_1, parent, false);
+                    .inflate(R.layout.list_item_softball, parent, false);
             return new SoftballHolder(view);
         }
 
         @Override
         public void onBindViewHolder(SoftballHolder holder, int position){
             Softball softball = mSoftballs.get(position);
-            holder.mTitleTextView.setText(softball.getTitle());
+            holder.bindSoftball(softball);
         }
 
         @Override

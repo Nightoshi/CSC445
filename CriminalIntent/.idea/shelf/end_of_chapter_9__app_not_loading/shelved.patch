@@ -1,0 +1,548 @@
+Index: app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeLab.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeLab.java	(date 1492446145000)
++++ app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeLab.java	(revision )
+@@ -10,44 +10,38 @@
+  * Created by Cyborg on 4/10/2017.
+  */
+ 
+-public class CrimeLab
+-{
++public class CrimeLab {
+     private static CrimeLab sCrimeLab;
+ 
+-    private List<Crime> mCrimes;
++    private ArrayList<Crime> mCrimes;
+ 
+     public static CrimeLab get(Context context) {
+-        if(sCrimeLab == null)
+-        {
++        if (sCrimeLab == null) {
+             sCrimeLab = new CrimeLab(context);
+         }
+         return sCrimeLab;
+     }
+ 
+-    private CrimeLab(Context context)
+-    {
++    private CrimeLab(Context context) {
+         mCrimes = new ArrayList<>();
+-        for(int i = 0; i < 100; i++)
+-        {
++        for (int i = 0; i < 100; i++) {
+             Crime crime = new Crime();
+-            crime.setTitle("Crime #"+i);
++            crime.setTitle("Crime #" + i);
+-            crime.setSolved(i % 2 == 0); //Every other one
++            crime.setSolved(i % 2 == 0);
+             mCrimes.add(crime);
+         }
+     }
+ 
+-    public List<Crime> getCrimes()
+-    {
++    public List<Crime> getCrimes() {
+         return mCrimes;
+     }
+ 
+-    public Crime getCrime(UUID id)
+-    {
+-        for(Crime crime : mCrimes)
+-        {
+-            if(crime.getId().equals(id))
++    public Crime getCrime(UUID id) {
++        for (Crime crime : mCrimes) {
++            if (crime.getId().equals(id)) {
+-                return  crime;
++                return crime;
++            }
+         }
+-        return  null;
++        return null;
+     }
+-}
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_crime_list.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_crime_list.xml	(date 1492446145000)
++++ app/src/main/res/layout/fragment_crime_list.xml	(revision )
+@@ -1,8 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <android.support.v7.widget.RecyclerView
+     xmlns:android="http://schemas.android.com/apk/res/android"
++    android:id="@+id/crime_recycler_view"
+     android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:id="@+id/crime_recycler_view">
+-
+-</android.support.v7.widget.RecyclerView>
+\ No newline at end of file
++    android:layout_height="match_parent"/>
+\ No newline at end of file
+Index: app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/SingleFragmentActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/SingleFragmentActivity.java	(date 1492446145000)
++++ app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/SingleFragmentActivity.java	(revision )
+@@ -9,25 +9,24 @@
+  * Created by Cyborg on 4/10/2017.
+  */
+ 
+-public abstract class SingleFragmentActivity extends FragmentActivity
+-{
++public abstract class SingleFragmentActivity extends FragmentActivity {
++
+     protected abstract Fragment createFragment();
+ 
+-
+     @Override
+-    public void onCreate(Bundle savedInstanceState)
+-    {
++    protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_fragment);
+ 
+         FragmentManager fm = getSupportFragmentManager();
+         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+ 
+-        if(fragment == null)
+-        {
++        if (fragment == null) {
+             fragment = createFragment();
+-            fm.beginTransaction().add(R.id.fragment_container,fragment)
++            fm.beginTransaction()
++                    .add(R.id.fragment_container, fragment)
+                     .commit();
+         }
+     }
++
+ }
+Index: app/src/main/res/layout/activity_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_fragment.xml	(date 1492446145000)
++++ app/src/main/res/layout/activity_fragment.xml	(revision )
+@@ -1,13 +1,4 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<android.support.constraint.ConstraintLayout
+-    xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context="edu.missouriwestern.akhan5.csc445.criminalintend.CrimeActivity">
+-
+-    <FrameLayout
++<FrameLayout
+         xmlns:android="http://schemas.android.com/apk/res/android"
+         android:id="@+id/fragment_container"
+         android:layout_height="match_parent"
+@@ -15,4 +6,4 @@
+          />
+ 
+ 
+-</android.support.constraint.ConstraintLayout>
++
+Index: app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeListFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeListFragment.java	(date 1492446145000)
++++ app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeListFragment.java	(revision )
+@@ -18,18 +18,18 @@
+  * Created by Cyborg on 4/10/2017.
+  */
+ 
+-public class CrimeListFragment extends Fragment 
+-{
++public class CrimeListFragment extends Fragment {
+ 
+     private RecyclerView mCrimeRecyclerView;
+     private CrimeAdapter mAdapter;
+-    
++
+     @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container, 
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-                             Bundle savedInstanceState)
+-    {
++                             Bundle savedInstanceState) {
+-        View view = inflater.inflate(R.layout.fragment_crime_list,container,false);
++        View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
+-        mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
++
++        mCrimeRecyclerView = (RecyclerView) view
++                .findViewById(R.id.crime_recycler_view);
+         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+ 
+         updateUI();
+@@ -37,8 +37,7 @@
+         return view;
+     }
+ 
+-    private void updateUI()
+-    {
++    private void updateUI() {
+         CrimeLab crimeLab = CrimeLab.get(getActivity());
+         List<Crime> crimes = crimeLab.getCrimes();
+ 
+@@ -46,51 +45,45 @@
+         mCrimeRecyclerView.setAdapter(mAdapter);
+     }
+ 
+-    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+-    {
+-        //public TextView mTitleTextView;
+-        private Crime mCrime;
++    private class CrimeHolder extends RecyclerView.ViewHolder
++            implements View.OnClickListener {
++
+         private TextView mTitleTextView;
+         private TextView mDateTextView;
+         private CheckBox mSolvedCheckBox;
+ 
+-        public void bindCrime(Crime crime)
+-        {
+-            mCrime = crime;
+-            mTitleTextView.setText(mCrime.getTitle());
+-            mDateTextView.setText((CharSequence) mCrime.getDate());
+-            mSolvedCheckBox.setChecked(mCrime.isSolved());
++        private Crime mCrime;
+ 
+-
+-        }
+-
+-
+-        public CrimeHolder(View itemView)
+-        {
++        public CrimeHolder(View itemView) {
+             super(itemView);
+             itemView.setOnClickListener(this);
+ 
+-            //mTitleTextView = (TextView) itemView;
+-
+             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_crime_title_text_view);
+             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_crime_date_text_view);
+             mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
+         }
+ 
++        public void bindCrime(Crime crime) {
++            mCrime = crime;
++            mTitleTextView.setText(mCrime.getTitle());
++            mDateTextView.setText(mCrime.getDate().toString());
++            mSolvedCheckBox.setChecked(mCrime.isSolved());
++        }
++
+         @Override
+         public void onClick(View v) {
+-            Toast.makeText(getActivity(),mCrime.getTitle() + " clicked!",
+-                    Toast.LENGTH_SHORT).show();
+-
++            Toast.makeText(getActivity(),
++                    mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT)
++                    .show();
+         }
+     }
+ 
+-
+     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
+ 
+         private List<Crime> mCrimes;
+ 
+-        public CrimeAdapter(List<Crime> crimes) {
++        public CrimeAdapter(List<Crime> crimes)
++        {
+             mCrimes = crimes;
+         }
+ 
+@@ -112,6 +105,7 @@
+             return mCrimes.size();
+         }
+     }
++}
+ 
+ //    private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder>
+ //    {
+@@ -148,4 +142,4 @@
+ //    }
+     
+         
+-}
++
+Index: app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/Crime.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/Crime.java	(date 1492446145000)
++++ app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/Crime.java	(revision )
+@@ -7,8 +7,8 @@
+  * Created by Cyborg on 3/29/2017.
+  */
+ 
+-public class Crime
+-{
++public class Crime {
++
+     private UUID mId;
+     private String mTitle;
+     private Date mDate;
+@@ -46,6 +46,4 @@
+     public void setSolved(boolean solved) {
+         mSolved = solved;
+     }
+-
+-
+-}
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/list_item_crime.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/list_item_crime.xml	(date 1492446145000)
++++ app/src/main/res/layout/list_item_crime.xml	(revision )
+@@ -1,10 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout
+-    xmlns:android="http://schemas.android.com/apk/res/android"
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    >
++    android:layout_height="match_parent">
+ 
+     <CheckBox
+         android:id="@+id/list_item_crime_solved_check_box"
+@@ -17,20 +15,18 @@
+         android:id="@+id/list_item_crime_title_text_view"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
++        android:layout_toLeftOf="@id/list_item_crime_solved_check_box"
+         android:textStyle="bold"
+         android:padding="4dp"
+-        tools:text="Crime Title"
+-        android:layout_above="@+id/list_item_crime_date_text_view"
+-        android:layout_alignParentStart="true" />
++        tools:text="Crime Title"/>
+ 
+     <TextView
+         android:id="@+id/list_item_crime_date_text_view"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
++        android:layout_toLeftOf="@id/list_item_crime_solved_check_box"
++        android:layout_below="@id/list_item_crime_title_text_view"
+         android:padding="4dp"
+-        tools:text="Crime Date"
+-        android:layout_below="@+id/list_item_crime_solved_check_box"
+-        android:layout_alignParentStart="true"
+-        android:layout_marginTop="14dp" />
++        tools:text="Crime Date"/>
+ 
+ </RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeActivity.java	(date 1492446145000)
++++ app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeActivity.java	(revision )
+@@ -4,13 +4,12 @@
+ 
+ public class CrimeActivity extends SingleFragmentActivity
+ {
+-    final static String TAG = "CrimeActivity";
+-    public static final String EXTRA_CRIME_ID = "edu.missouriwestern.akhan5.csc445.criminalintend.crime_id";
++    //final static String TAG = "CrimeActivity";
++    //public static final String EXTRA_CRIME_ID = "edu.missouriwestern.akhan5.csc445.criminalintend.crime_id";
+ 
+ 
+     @Override
+-    protected Fragment createFragment()
+-    {
++    protected Fragment createFragment() {
+         return new CrimeFragment();
+     }
+ 
+Index: app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeFragment.java	(date 1492446145000)
++++ app/src/main/java/edu/missouriwestern/akhan5/csc445/criminalintend/CrimeFragment.java	(revision )
+@@ -16,63 +16,53 @@
+  * Created by Cyborg on 4/2/2017.
+  */
+ 
+-public class CrimeFragment extends Fragment
+-{
++public class CrimeFragment extends Fragment {
++
+     private Crime mCrime;
+     private EditText mTitleField;
+     private Button mDateButton;
+-    private CheckBox mSolvedCheckBox;
++    private CheckBox mSolvedCheckbox;
+ 
+     @Override
+-    public void onCreate(Bundle savedInstanceState)
+-    {
++    public void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         mCrime = new Crime();
+     }
+ 
+     @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+-    {
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
+         View v = inflater.inflate(R.layout.fragment_crime, container, false);
+ 
+-        mTitleField = (EditText)v.findViewById(R.id.crime_title);
++        mTitleField = (EditText) v.findViewById(R.id.crime_title);
+         mTitleField.addTextChangedListener(new TextWatcher() {
+             @Override
+-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+-            {
+-                //This space is intentionally left blank
++            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+ 
+             }
+ 
+-
+             @Override
+-            public void onTextChanged(CharSequence s, int start, int before, int count)
+-            {
++            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                 mCrime.setTitle(s.toString());
+-
+             }
+ 
+             @Override
+-            public void afterTextChanged(Editable s)
+-            {
+-                //This one is also left blank
++            public void afterTextChanged(Editable s) {
+ 
+             }
+         });
+ 
+-        mDateButton = (Button)v.findViewById(R.id.crime_date);
++        mDateButton = (Button) v.findViewById(R.id.crime_date);
+         mDateButton.setText(mCrime.getDate().toString());
+         mDateButton.setEnabled(false);
+ 
+-        mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
+-        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
++        mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
++        mSolvedCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+             @Override
+             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+-                //set the crime's solved property
+                 mCrime.setSolved(isChecked);
+             }
+         });
+-
+ 
+         return v;
+     }
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(date 1492446145000)
++++ build.gradle	(revision )
+@@ -5,7 +5,7 @@
+         jcenter()
+     }
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:2.3.0'
++        classpath 'com.android.tools.build:gradle:2.3.1'
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+Index: app/src/main/res/layout/fragment_crime.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_crime.xml	(date 1492446145000)
++++ app/src/main/res/layout/fragment_crime.xml	(revision )
+@@ -1,37 +1,35 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<LinearLayout
+-    xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:orientation="vertical" android:layout_width="match_parent"
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:orientation="vertical"
++    android:layout_width="match_parent"
+     android:layout_height="match_parent">
+ 
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="@string/crime_title_label"
+-        style="?android:listSeparatorTextViewStyle"
+-        />
++        style="?android:listSeparatorTextViewStyle"/>
+ 
+     <EditText
++        android:id="@+id/crime_title"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-        android:id="@+id/crime_title"
+-        android:hint="@string/crime_title_hint"
+-        />
++        android:layout_marginLeft="16dp"
++        android:layout_marginRight="16dp"
++        android:hint="@string/crime_title_hint"/>
+ 
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="@string/crime_details_label"
+-        style="?android:listSeparatorTextViewStyle"
+-        />
++        style="?android:listSeparatorTextViewStyle"/>
+ 
+     <Button
+         android:id="@+id/crime_date"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="16dp"
+-        android:layout_marginRight="16dp"
+-        />
++        android:layout_marginRight="16dp"/>
+ 
+     <CheckBox
+         android:id="@+id/crime_solved"
+@@ -39,9 +37,6 @@
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="16dp"
+         android:layout_marginRight="16dp"
+-        android:text="@string/crime_solved_label"
+-        />
+-
+-
++        android:text="@string/crime_solved_label"/>
+ 
+ </LinearLayout>
+\ No newline at end of file
